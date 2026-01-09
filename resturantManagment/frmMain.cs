@@ -11,6 +11,7 @@ namespace resturantManagment
         public frmMain()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             ConnectButtonEvents();
         }
 
