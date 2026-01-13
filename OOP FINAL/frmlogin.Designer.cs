@@ -39,6 +39,7 @@
             this.btnlogin = new System.Windows.Forms.Button();
             this.btnexit = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.btnSignup = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -143,11 +144,23 @@
             this.lblMessage.Size = new System.Drawing.Size(0, 17);
             this.lblMessage.TabIndex = 7;
             // 
+            // btnSignup
+            // 
+            this.btnSignup.BackColor = System.Drawing.Color.Transparent;
+            this.btnSignup.ForeColor = System.Drawing.Color.Blue;
+            this.btnSignup.Location = new System.Drawing.Point(247, 265);
+            this.btnSignup.Name = "btnSignup";
+            this.btnSignup.Size = new System.Drawing.Size(75, 23);
+            this.btnSignup.TabIndex = 8;
+            this.btnSignup.Text = "SIGN UP";
+            this.btnSignup.UseVisualStyleBackColor = false;
+            // 
             // frmlogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 590);
+            this.Controls.Add(this.btnSignup);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnexit);
             this.Controls.Add(this.btnlogin);
@@ -183,6 +196,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnSignup;
     }
 }
 
