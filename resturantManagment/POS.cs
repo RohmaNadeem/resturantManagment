@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +17,8 @@ namespace resturantManagment
 {
     public partial class POS : Form
     {
+        string selectedOrderType = "";
+
         Cart cart = new Cart();
         BillingService billing = new BillingService();
 
@@ -133,16 +135,31 @@ namespace resturantManagment
                 UpdateBill();
             }
         }
+        
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (cart.Items.Count == 0)
+            {
+                MessageBox.Show("Cart is empty!");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(selectedOrderType))
+            {
+                MessageBox.Show("Select Delivery / Takeaway / Dine-In");
+                return;
+            }
             Orders order = new Orders
             {
                 OrderId = new Random().Next(1000, 9999),
                 OrderDate = DateTime.Now,
                 Items = cart.Items,
-                TotalAmount = billing.CalculateTotal(cart.GetSubtotal())
+                TotalAmount = billing.CalculateTotal(cart.GetSubtotal()),
+                OrderType = selectedOrderType,
+                Status = "Pending"
             };
+            OrderService.KitchenOrders.Add(order);
 
             new FileStorageService().SaveOrder(order);
 
@@ -184,6 +201,10 @@ namespace resturantManagment
             receipt.AppendLine("Thank you for your visit!");
 
             return receipt.ToString();
+        }
+        public static class OrderService
+        {
+            public static List<Orders> KitchenOrders = new List<Orders>();
         }
         private void UpdateBill()
         {
@@ -235,6 +256,36 @@ namespace resturantManagment
 
             HighlightButton(button5, button4);
         }
-       
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            selectedOrderType = "Delivery";
+            HighlightOrderType(button6);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            selectedOrderType = "Takeaway";
+            HighlightOrderType(button7);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            selectedOrderType = "Dine-In";
+            HighlightOrderType(button8);
+
+        }
+        void HighlightOrderType(System.Windows.Forms.Button active)
+        {
+            button6.BackColor = Color.LightGray;
+            button7.BackColor = Color.LightGray;
+            button8.BackColor = Color.LightGray;
+
+            active.BackColor = Color.FromArgb(27, 94, 32);
+            active.ForeColor = Color.White;
+        }
+
     }
 }
+
+
